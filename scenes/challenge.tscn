@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://ei2d4ggyyhnq"]
+
+[ext_resource type="Script" uid="uid://djde0rnydmjj" path="res://scenes/challenge.gd" id="1_k24d4"]
+
+[node name="challenge" type="Node" groups=["challenge"]]
+script = ExtResource("1_k24d4")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.0
+offset_right = 61.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "challenge name"

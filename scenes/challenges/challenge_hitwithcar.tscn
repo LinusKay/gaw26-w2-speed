@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://8aj52o0atd0y"]
+
+[ext_resource type="PackedScene" uid="uid://ei2d4ggyyhnq" path="res://scenes/challenge.tscn" id="1_80nwe"]
+[ext_resource type="Script" uid="uid://bloqpewdkphw8" path="res://scenes/challenges/challenge_hitwithcar/challenge_hitwithcar_character.gd" id="2_v8hp2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qe3ke"]
+
+[node name="challenge" instance=ExtResource("1_80nwe")]
+challenge_name = "Challenge Hit With Car"
+
+[node name="Node3D" type="Node3D" parent="." index="1"]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" index="0"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Node3D" index="1"]
+script = ExtResource("2_v8hp2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/CharacterBody3D" index="0"]
+shape = SubResource("CapsuleShape3D_qe3ke")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.153902)

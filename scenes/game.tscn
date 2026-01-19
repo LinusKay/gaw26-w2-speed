@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt7jode2ppwb"]
+
+[ext_resource type="Script" uid="uid://c21xy0iqq07di" path="res://scenes/game.gd" id="1_yqjtg"]
+[ext_resource type="AudioStream" uid="uid://dukiuupmnh621" path="res://nolliegrooveslow.mp3" id="2_yqjtg"]
+
+[node name="game" type="Node"]
+script = ExtResource("1_yqjtg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_yqjtg")
+volume_db = -20.0
+autoplay = true
+
+[connection signal="challenge_loaded" from="." to="." method="_on_challenge_loaded"]
+[connection signal="challenge_unloaded" from="." to="." method="_on_challenge_unloaded"]

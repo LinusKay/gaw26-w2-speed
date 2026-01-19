@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1n0opsp23jyd"]
+
+[ext_resource type="PackedScene" uid="uid://ei2d4ggyyhnq" path="res://scenes/challenge.tscn" id="1_6ydyr"]
+[ext_resource type="Script" uid="uid://cmvn0eyjhl5i3" path="res://scenes/challenges/challenge_test.gd" id="2_sdl6k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ydyr"]
+size = Vector2(257.5, 167.5)
+
+[node name="challenge" instance=ExtResource("1_6ydyr")]
+script = ExtResource("2_sdl6k")
+challenge_name = "Challenge Test"
+
+[node name="AreaClickSuccess" type="Area2D" parent="." index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaClickSuccess" index="0"]
+position = Vector2(680.25, 268.25)
+shape = SubResource("RectangleShape2D_6ydyr")
+
+[node name="Label" type="Label" parent="AreaClickSuccess" index="1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 679.0
+offset_top = 264.0
+offset_right = 719.0
+offset_bottom = 287.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "click to win!"
+
+[node name="AreaClickFailure" type="Area2D" parent="." index="2"]
+position = Vector2(-377, 234)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaClickFailure" index="0"]
+position = Vector2(680.25, 268.25)
+shape = SubResource("RectangleShape2D_6ydyr")
+
+[node name="Label" type="Label" parent="AreaClickFailure" index="1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 679.0
+offset_top = 264.0
+offset_right = 719.0
+offset_bottom = 287.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "click to lose!"
+
+[connection signal="input_event" from="AreaClickSuccess" to="." method="_on_area_click_success_input_event"]
+[connection signal="input_event" from="AreaClickFailure" to="." method="_on_area_click_failure_input_event"]
