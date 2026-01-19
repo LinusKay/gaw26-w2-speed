@@ -11,5 +11,56 @@ stream = ExtResource("2_yqjtg")
 volume_db = -20.0
 autoplay = true
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LabelWin" type="RichTextLabel" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[wave]YOU WIN[/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelLose" type="RichTextLabel" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[wave]YOU LOSE[/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="challenge_loaded" from="." to="." method="_on_challenge_loaded"]
 [connection signal="challenge_unloaded" from="." to="." method="_on_challenge_unloaded"]
+[connection signal="timeout" from="ResultTimer" to="." method="_on_result_timer_timeout"]

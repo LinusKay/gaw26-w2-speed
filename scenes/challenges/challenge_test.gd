@@ -26,5 +26,4 @@ func _on_area_click_failure_input_event(viewport: Node, event: InputEvent, shape
 
 
 func _challenge_complete(success: bool) -> void:
-	print("challenge complete init")
 	super(success)

@@ -7,10 +7,16 @@ var load_more: bool = true
 
 var challenge_index: int = 1
 @onready var challenges: Array[PackedScene] = [
-	preload("res://scenes/challenges/challenge_test.tscn"),
-	preload("res://scenes/challenges/challenge_inputpin.tscn"),
-	preload("res://scenes/challenges/challenge_inputpin.tscn"),
+	#preload("res://scenes/challenges/challenge_test.tscn"),
+	#preload("res://scenes/challenges/challenge_inputpin.tscn"),
+	preload("res://scenes/challenges/challenge_hitwithcar.tscn"),
+	preload("res://scenes/challenges/challenge_hitwithcar.tscn"),
+	preload("res://scenes/challenges/challenge_hitwithcar.tscn"),
 ]
+
+@onready var result_timer: Timer = $ResultTimer
+@onready var label_win: RichTextLabel = $Control/LabelWin
+@onready var label_lose: RichTextLabel = $Control/LabelLose
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,10 +34,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func load_challenge(new_challenge: Node) -> void:
+	new_challenge.challenge_complete.connect(_show_results)
 	add_child(new_challenge)
-	
-	new_challenge.challenge_success.connect(unload_challenge)
-	new_challenge.challenge_failure.connect(unload_challenge)
 	
 	challenge_loaded.emit(new_challenge)
 
@@ -39,8 +43,7 @@ func load_challenge(new_challenge: Node) -> void:
 func unload_challenge() -> void:
 	var current_challenge: Node = get_tree().get_first_node_in_group("challenge")
 	
-	current_challenge.challenge_success.disconnect(unload_challenge)
-	current_challenge.challenge_failure.disconnect(unload_challenge)
+	current_challenge.challenge_complete.disconnect(_show_results)
 	current_challenge.queue_free()
 	
 	challenge_unloaded.emit(current_challenge)
@@ -62,3 +65,18 @@ func _select_random_challenge() -> Node:
 	challenge_index = randi_range(0, challenges_temp.size() - 1)
 	var new_challenge: Node = challenges_temp[challenge_index].instantiate()
 	return new_challenge
+
+
+func _on_result_timer_timeout() -> void:
+	label_win.hide()
+	label_lose.hide()
+	unload_challenge()
+
+
+func _show_results(success: bool) -> void:
+	GameSettings.GAME_SPEED += 0.1
+	if success:
+		label_win.show()
+	else:
+		label_lose.show()
+	result_timer.start()
