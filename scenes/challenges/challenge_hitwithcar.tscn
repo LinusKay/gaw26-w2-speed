@@ -1,53 +1,191 @@
-[gd_scene load_steps=9 format=3 uid="uid://8aj52o0atd0y"]
+[gd_scene load_steps=19 format=3 uid="uid://8aj52o0atd0y"]
 
 [ext_resource type="PackedScene" uid="uid://ei2d4ggyyhnq" path="res://scenes/challenge.tscn" id="1_80nwe"]
 [ext_resource type="Script" uid="uid://b7cp0duulekam" path="res://scenes/challenges/challenge_hitwithcar/challenge_hitwithcar.gd" id="2_qe3ke"]
 [ext_resource type="Script" uid="uid://bloqpewdkphw8" path="res://scenes/challenges/challenge_hitwithcar/challenge_hitwithcar_character.gd" id="2_v8hp2"]
+[ext_resource type="Shader" uid="uid://j048ius7vhsx" path="res://shaders/speedlines.gdshader" id="3_6e4bc"]
 [ext_resource type="Script" uid="uid://wl7iu2j3xlgc" path="res://scenes/challenges/challenge_hitwithcar/challenge_hitwithcar_area_3d_success.gd" id="4_qe3ke"]
 [ext_resource type="Texture2D" uid="uid://57s34pnojymi" path="res://textures/oldlady.png" id="5_fxvfx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6e4bc"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_bcs2l"]
+sky_material = SubResource("ProceduralSkyMaterial_6e4bc")
+
+[sub_resource type="Environment" id="Environment_qewqc"]
+background_mode = 2
+sky = SubResource("Sky_bcs2l")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bcs2l"]
+shader = ExtResource("3_6e4bc")
+shader_parameter/Speed = 0.6270000297825
+shader_parameter/LineLength = 0.954000045315
+shader_parameter/LineColor = Color(1, 1, 1, 1)
+shader_parameter/Softness = 0.1130000053675
+shader_parameter/Weirdness = 0.16800000798
+shader_parameter/Radius = 1.3590000645525
+shader_parameter/Freq = 10.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fxvfx"]
+viewport_path = NodePath("Control/SubViewport")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qe3ke"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fxvfx"]
 size = Vector3(48.379395, 21.150879, 7.3983765)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxvfx"]
+transparency = 1
+albedo_color = Color(0.92941177, 0.47843137, 0.67058825, 0.3647059)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8hp2"]
+size = Vector3(1, 1, 0.59277344)
+
+[sub_resource type="Animation" id="Animation_bcs2l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6e4bc"]
+resource_name = "hitwithcar"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.5707964, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qewqc"]
+_data = {
+&"RESET": SubResource("Animation_bcs2l"),
+&"hitwithcar": SubResource("Animation_6e4bc")
+}
 
 [node name="challenge" instance=ExtResource("1_80nwe")]
 script = ExtResource("2_qe3ke")
 challenge_name = "Challenge Hit With Car"
+timed = false
 
-[node name="Node3D" type="Node3D" parent="." index="1"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = SubResource("Environment_qewqc")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="Node3D" index="0"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="Control" index="1"]
+material = SubResource("ShaderMaterial_bcs2l")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_fxvfx")
+expand_mode = 1
+
+[node name="SubViewport" type="SubViewport" parent="Control" index="2"]
+
+[node name="Node3D" type="Node3D" parent="Control/SubViewport" index="0"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Control/SubViewport/Node3D" index="0"]
 script = ExtResource("2_v8hp2")
 
-[node name="Camera3D" type="Camera3D" parent="Node3D/CharacterBody3D" index="0"]
+[node name="Camera3D" type="Camera3D" parent="Control/SubViewport/Node3D/CharacterBody3D" index="0"]
+fov = 98.2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/CharacterBody3D" index="1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control/SubViewport/Node3D/CharacterBody3D" index="1"]
 shape = SubResource("CapsuleShape3D_qe3ke")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Node3D/CharacterBody3D" index="2"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Control/SubViewport/Node3D/CharacterBody3D" index="2"]
 
-[node name="Area3DFailure" type="Area3D" parent="Node3D" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.324085)
+[node name="Area3DFailure" type="Area3D" parent="Control/SubViewport/Node3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.785088)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3DFailure" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control/SubViewport/Node3D/Area3DFailure" index="0"]
 shape = SubResource("BoxShape3D_fxvfx")
 
-[node name="Area3DSuccess" type="Area3D" parent="Node3D" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023162842, 0, -9.362817)
+[node name="CSGBox3D" type="CSGBox3D" parent="Control/SubViewport/Node3D/Area3DFailure" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0826569, 0, 3.1766987)
+size = Vector3(21.195404, 1, 1)
+material = SubResource("StandardMaterial3D_fxvfx")
+
+[node name="Area3DSuccess" type="Area3D" parent="Control/SubViewport/Node3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023162842, 0, -11.823821)
 script = ExtResource("4_qe3ke")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3DSuccess" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control/SubViewport/Node3D/Area3DSuccess" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.23067474)
 shape = SubResource("BoxShape3D_v8hp2")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/Area3DSuccess" index="1"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Control/SubViewport/Node3D/Area3DSuccess" index="1"]
 visible = false
 
-[node name="Sprite3D" type="Sprite3D" parent="Node3D/Area3DSuccess" index="2"]
+[node name="Sprite3D" type="Sprite3D" parent="Control/SubViewport/Node3D/Area3DSuccess" index="2"]
 pixel_size = 0.005
 texture = ExtResource("5_fxvfx")
 
-[connection signal="body_entered" from="Node3D/Area3DFailure" to="." method="_on_area_3d_failure_body_entered"]
-[connection signal="body_entered" from="Node3D/Area3DSuccess" to="." method="_on_area_3d_success_body_entered"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/SubViewport/Node3D/Area3DSuccess/Sprite3D" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_qewqc")
+}
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Control/SubViewport/Node3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5775337, 2.7147827, -4.408514)
+size = Vector3(3.6157227, 6.4295654, 4.8950195)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Control/SubViewport/Node3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9357224, 2.0522766, -11.856935)
+size = Vector3(3.6157227, 5.104553, 4.8950195)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Control/SubViewport/Node3D" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.456154, 2.2751007, -19.383957)
+size = Vector3(3.6157227, 5.5502014, 6.470825)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Control/SubViewport/Node3D" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.860899, 1.8416519, -20.24849)
+size = Vector3(3.6157227, 4.683304, 4.7417603)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Control/SubViewport/Node3D" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.860899, 1.8416519, -14.80705)
+size = Vector3(3.6157227, 4.683304, 4.7417603)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Control/SubViewport/Node3D" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5717154, 3.0082283, -7.5410976)
+size = Vector3(3.6157227, 7.0164566, 4.7417603)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Control/SubViewport/Node3D" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5717154, 3.0082283, 2.2741232)
+size = Vector3(3.6157227, 7.0164566, 10.285065)
+
+[node name="LabelTimer" parent="Control" index="3"]
+visible = false
+
+[connection signal="body_entered" from="Control/SubViewport/Node3D/Area3DFailure" to="." method="_on_area_3d_failure_body_entered"]
+[connection signal="body_entered" from="Control/SubViewport/Node3D/Area3DSuccess" to="." method="_on_area_3d_success_body_entered"]

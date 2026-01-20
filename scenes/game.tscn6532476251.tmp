@@ -280,6 +280,14 @@ offset_right = 1072.0
 offset_bottom = 70.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vtaks")
 
+[node name="ButtonMinimise" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1020.0
+offset_top = 53.0
+offset_right = 1036.0
+offset_bottom = 70.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vtaks")
+
 [node name="ResultTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -356,6 +364,8 @@ shape = SubResource("RectangleShape2D_vtaks")
 [connection signal="challenge_loaded" from="." to="." method="_on_challenge_loaded"]
 [connection signal="challenge_unloaded" from="." to="." method="_on_challenge_unloaded"]
 [connection signal="pressed" from="Control/ButtonQuit" to="." method="_on_button_quit_pressed"]
+[connection signal="pressed" from="Control/ButtonMinimise" to="." method="_on_button_minimise_pressed"]
+[connection signal="pressed" from="Control/ButtonMinimise" to="." method="_on_button_quit_pressed"]
 [connection signal="timeout" from="ResultTimer" to="." method="_on_result_timer_timeout"]
 [connection signal="meta_clicked" from="PopupAvatar/Panel/MarginContainer/LabelTalk" to="PopupAvatar" method="_on_label_talk_meta_clicked"]
 [connection signal="input_event" from="PopupAvatar/Panel/MarginContainer/LabelClose/Area2DClose" to="PopupAvatar" method="_on_area_2d_close_input_event"]

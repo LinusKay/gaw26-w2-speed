@@ -1,17 +1,15 @@
 extends Challenge
 
+@onready var label_prompt: Label = $Control/LabelPrompt
 @onready var input: LineEdit = $Control/Input
 var input_last: String = ""
-var input_goal: String = "1998"
+var input_goal: String = str(randi_range(1000, 99999))
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	input.grab_focus()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	label_prompt.text = "Input Pin: " + input_goal
+	super()
 
 
 func _on_input_text_changed(new_text: String) -> void:
@@ -24,7 +22,10 @@ func _on_input_text_changed(new_text: String) -> void:
 			input.text = input_last
 		
 		input.caret_column = caret_column
-			
-		if new_text == input_goal:
-			input.release_focus()
-			_challenge_complete(true)
+		
+		if new_text.length() == input_goal.length():
+			if new_text == input_goal:
+				input.release_focus()
+				_challenge_complete(true)
+			else:
+				_challenge_complete(false)

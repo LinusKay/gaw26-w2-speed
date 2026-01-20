@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://v4lg5gf57upb"]
 
 [ext_resource type="PackedScene" uid="uid://ei2d4ggyyhnq" path="res://scenes/challenge.tscn" id="1_7s0ik"]
-[ext_resource type="Script" uid="uid://bcun44rvsyc3p" path="res://scenes/challenges/challenge_inputpin.gd" id="2_4ujs2"]
+[ext_resource type="Script" uid="uid://bcun44rvsyc3p" path="res://scenes/challenges/challenge_inputpin/challenge_inputpin.gd" id="2_4ujs2"]
 
 [node name="challenge" instance=ExtResource("1_7s0ik")]
 script = ExtResource("2_4ujs2")
 challenge_name = "Challenge Input Pin"
 
-[node name="Label2" type="Label" parent="Control" index="1"]
+[node name="LabelPrompt" type="Label" parent="Control" index="1"]
 layout_mode = 0
 offset_left = 565.0
 offset_top = 111.0

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ei2d4ggyyhnq"]
+[gd_scene load_steps=4 format=3 uid="uid://ei2d4ggyyhnq"]
 
 [ext_resource type="Script" uid="uid://djde0rnydmjj" path="res://scenes/challenge.gd" id="1_k24d4"]
+[ext_resource type="Theme" uid="uid://deoligb38x4v" path="res://scenes/control_theme.tres" id="2_r4y41"]
+[ext_resource type="Theme" uid="uid://dfp8u13bukj3a" path="res://themes/result_label.tres" id="3_qtu0d"]
 
 [node name="challenge" type="Node" groups=["challenge"]]
 script = ExtResource("1_k24d4")
@@ -13,6 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("2_r4y41")
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 1
@@ -24,3 +27,21 @@ offset_right = 61.0
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "challenge name"
+
+[node name="LabelTimer" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = -40.0
+offset_right = 58.0
+offset_bottom = -17.0
+grow_vertical = 0
+theme = ExtResource("3_qtu0d")
+text = "5"
+
+[node name="ChallengeTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="ChallengeTimer" to="." method="_on_challenge_timer_timeout"]

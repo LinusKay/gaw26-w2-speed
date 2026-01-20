@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgqogayi1n65m"]
+
+[ext_resource type="PackedScene" uid="uid://ei2d4ggyyhnq" path="res://scenes/challenge.tscn" id="1_70cyt"]
+[ext_resource type="Script" uid="uid://b83soyo5mua5c" path="res://scenes/challenges/challenge_dontclicktowin/challenge_dontclicktowin.gd" id="2_23evu"]
+[ext_resource type="Texture2D" uid="uid://lgwurf4rxrmc" path="res://scenes/challenges/challenge_dontclicktowin/buge.png" id="3_23evu"]
+
+[node name="challenge" instance=ExtResource("1_70cyt")]
+script = ExtResource("2_23evu")
+
+[node name="LabelPrompt" type="Label" parent="Control" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -38.0
+offset_right = 67.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Don't click to win"
+
+[node name="TextureRect" type="TextureRect" parent="Control" index="2"]
+layout_mode = 0
+offset_left = 733.0
+offset_top = 355.0
+offset_right = 833.0
+offset_bottom = 455.0
+texture = ExtResource("3_23evu")
+
+[node name="Panel" type="Panel" parent="Control" index="3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -63.0
+offset_right = 136.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
