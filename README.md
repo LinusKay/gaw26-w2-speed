@@ -33,9 +33,9 @@ During this week, I ended up being quite unhappy with this game. I recall being 
 
 ![showcase img 1](readme/screen4.png)
 
-There are a few references to other projects hidden in this one. The background image, and popup pyramidal sprite are taken from [Virtual Dream](https://virtualdream.live/), and the disco game is taken from my [Snowcret Santa game jam entry](https://umconfortable.itch.io/disco). 
+There are a few references to other projects hidden in this one. The background image, and popup pyramidal sprite are taken from [Virtual Dream](https://virtualdream.live/), and the disco game is taken from my [Snowcret Santa game jam entry](https://umconfortable.itch.io/disco). The music was also intended for another game, but I can't remember which!! Glad i got to use it for something so fitting though.
 
 ## Acknowledgements
-- wario
+- wario, and all the sound effects i stole
 - scar, rowan, daniel for playing warioware with me after a long d&d session
-- anyone keeping the microgame genre alive
+- people keeping the microgame genre alive wow thats so cool how do you design so many wacky games
