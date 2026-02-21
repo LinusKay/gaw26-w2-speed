@@ -29,7 +29,14 @@ I was able to build out a very rudimental system for challenges, which allows th
 
 ![showcase img 1](readme/screen3.png)
 
-During this week, I ended up being quite unhappy with this game. I recall being quite overwhelmed, and feeling like I was cobbling together different ideas and styles with no direct vision. In retrospect, I disagree, and think I did quite well all considered. There is a game loop, with lives and level tracking, making this technically a functional game, despite some jank in the games (shout out the one with white on white text).
+During this week, I ended up being quite unhappy with this game. I recall being quite overwhelmed, and feeling like I was cobbling together different ideas and styles with no direct vision. In retrospect, I disagree, and think I did quite well all considered. There is a game loop, with lives and level tracking, and a gradual speed ramp-up, making this technically a functional game, despite some jank in the games (shout out the one with white on white text). The five games included ended up being:
+* Don't Click to Win: <-- title. do not kill the bug
+* Enter Disco: walk that fella inside, using the arrow keys
+* Hit With Car: the old woman is evil. its okay. you don't want to know what she did. use your arrows to hit her w your car.
+* Input PIN: beep beep. write the number in the box. correct length but incorrect numbers is auto-fail
+* Test: click the (uhhh invisible?) box to win, or! to fail if you want
+
+Clearly a lot of work goes into making a variety of fun, fair minigames. A lot of respect for designers who manage this. 
 
 ![showcase img 1](readme/screen4.png)
 
