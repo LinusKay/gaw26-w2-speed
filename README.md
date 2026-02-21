@@ -1,5 +1,5 @@
 
-# Game-A-Week 2026: Week 1
+# Game-A-Week 2026: Week 2
 
 |<img src="readme/the-garden-of-earthly-delights-1.png" alt="game-a-week promo header image" height="200"> | <img src="readme/SpeedGif.gif" alt="game-a-week theme week 2 image" height="200"> 
 |---|---|
@@ -13,7 +13,7 @@
 
 > This week we’re focusing on creating a sense of speed! How do we do that with our senses? How do we accomplish that with the pacing and structure of a work? How do we thrill people, make them react fast, and make them feel like they’re put under the pump?
 
-## Game: Microgames
+## Game: MicroWare Janked!
 
 *This write-up was written after GAW26 concluded, with more retrospective notes*
 
